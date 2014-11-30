@@ -1,8 +1,15 @@
 <form id="form">
-  <textarea id="textarea" rows="6" cols="50" placeholder=" Paste text to check here..."></textarea>
+  <textarea id="textarea" rows="6" cols="50" placeholder=" Paste text to check here..." spellcheck='false'></textarea>
   <br>
+  <p id="error"></p>
   <input type="submit" id="submit">
 </form>
-<p id="textcontent"></p>
+<br>
 <h3 id="accuracy"></h3>
-<h4 id="outof"></h4>
+<div id="numbercontainer">
+  <h4 id="correct"></h4>
+  <h4 id="incorrect"></h4>
+  <h4 id="total"></h4>
+</div>
+<p id="textcontent"></p>
+

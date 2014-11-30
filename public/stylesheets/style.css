@@ -1,4 +1,26 @@
-
-.wrong {
+body {
+  text-align: center;
+}
+.wrong, .red, #error {
   color: red;
+}
+
+.green {
+  color: green;
+}
+
+#textcontent {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 10px;
+}
+
+#numbercontainer {
+  display: inline-flex;
+}
+
+#numbercontainer h4{
+  margin-top: -20px;
+  margin-bottom: -20px;
+  padding: 10px;
 }

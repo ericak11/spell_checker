@@ -1,4 +1,5 @@
 class RootController < ApplicationController
+
   get('/') do
     render(:erb, :index)
   end
@@ -11,26 +12,25 @@ class RootController < ApplicationController
     {phrase: phrase, accuracy: accuracy, incorrect: results[2], correct: results[1], total: total_words}.to_json
   end
 
-  def check_dictionary(text)
-    phrase = ""
-    correct = 0
-    incorrect = 0
-    dict = Hash.new{|hash, key| hash[key] = []}
+  def get_dictionary
+    dictionary = Hash.new{|hash, key| hash[key] = []}
     File.open('public/images/dictionary.txt').each do |row|
       word = row.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '').strip.gsub(/\/[^\s]+/,"").downcase
       first_letter =  word[0,1]
-      dict[first_letter] << word
+      dictionary[first_letter] << word
     end
+    dictionary
+  end
+
+  def check_dictionary(text)
+    dictionary = get_dictionary
+    phrase = ""
+    correct = 0
+    incorrect = 0
     text.split(" ").each do |word|
       adjusted_word = word.gsub(/[?.,:;"!&()‟”“’‛‘'*-]/, "").downcase
       substituted_word = word.gsub(/[’‛]/, "'").downcase
-      if dict[adjusted_word[0]].include? adjusted_word
-        phrase += "#{word} "
-        correct += 1
-      elsif dict[adjusted_word[0]].include? substituted_word
-        phrase += "#{word} "
-        correct += 1
-      elsif adjusted_word.count("0-9") > 0
+      if (dictionary[adjusted_word[0]].include? adjusted_word) || (dictionary[adjusted_word[0]].include? substituted_word) || (adjusted_word.count("0-9") > 0)
         phrase += "#{word} "
         correct += 1
       elsif  adjusted_word == ""
