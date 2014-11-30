@@ -1,10 +1,10 @@
 console.log('root.js loaded');
-
+var text;
 $(document).ready(function() {
   $('#form').on('submit', function(e) {
     e.preventDefault();
     clearContentArea();
-    var text = $('#textarea').val();
+    text = $('#textarea').val();
     $.ajax({
       type: "POST",
       url: "/",
@@ -27,7 +27,11 @@ $(document).ready(function() {
 });
 
 $( document ).ajaxError(function() {
-  $('#error').text("An error occured, Please try again.");
+  if (text) {
+    $('#error').text("An error occured, Please try again.");
+  } else{
+    $('#error').text("Please input text and try again.");
+  }
   $('#submit').show();
 });
 

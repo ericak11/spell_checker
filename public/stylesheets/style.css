@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  font-family: Verdana;
 }
 .wrong, .red, #error {
   color: red;
@@ -23,4 +24,14 @@ body {
   margin-top: -20px;
   margin-bottom: -20px;
   padding: 10px;
+}
+
+#submit {
+  border-radius: 4px;
+  background-color: deepskyblue;
+}
+
+#submit:hover {
+  border-radius: 4px;
+  background-color: gray;
 }
