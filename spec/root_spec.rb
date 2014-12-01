@@ -12,13 +12,18 @@ describe("the root") do
     visit("/")
     fill_in('textarea', :with => 'Hello this is sample text')
     click_on('submit')
-    page.has_css?('#submit', :visible => false)
+    expect(find('#submit')).not_to have_button('submit')
   end
-  it "can check spelling for accuracy", :js => true  do
-    Capybara.default_wait_time = 10
+  it "spell checking message appears on submit", :js => true  do
     visit("/")
     fill_in('textarea', :with => 'Hello this is sample text')
     click_on('submit')
-    expect(page).to have_text("Hello")
+    expect(find('#error')).to have_content()
+  end
+  it "can check spelling for accuracy", :js => true  do
+    visit("/")
+    fill_in('textarea', :with => 'Hello this is sample text')
+    click_on('submit')
+    expect(find('#accuracy')).to have_content('Accuracy')
   end
 end
