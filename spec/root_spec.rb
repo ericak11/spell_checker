@@ -8,11 +8,17 @@ describe("the root") do
     fill_in('textarea', :with => 'Hello this is sample text')
     click_on('submit')
   end
-  it "can check spelling for accuracy" do
+  it "submit button disapears on submit", :js => true  do
     visit("/")
     fill_in('textarea', :with => 'Hello this is sample text')
     click_on('submit')
-    save_and_open_page
-    expect(page).to have_content("Accuracy")
+    page.has_css?('#submit', :visible => false)
+  end
+  it "can check spelling for accuracy", :js => true  do
+    Capybara.default_wait_time = 10
+    visit("/")
+    fill_in('textarea', :with => 'Hello this is sample text')
+    click_on('submit')
+    expect(page).to have_text("Hello")
   end
 end

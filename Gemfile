@@ -20,5 +20,6 @@ end
 group :test do
   gem 'rspec',    '~> 3.0.0'
   gem 'capybara', '~> 2.4.1'
-  gem 'capybara-webkit'
+  gem 'jasmine'
+  gem 'jasmine-jquery-rails'
 end
