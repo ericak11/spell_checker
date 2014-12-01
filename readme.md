@@ -1,3 +1,10 @@
 ## Spell Checker
 
-to run enter the 'spell_checker' folder and in the command line run 'bundle exec rackup -p 3000'
+#### Running the Spell Checker
+To run: enter the 'spell_checker' folder and in the command line run 'bundle exec rackup -p 3000'
+
+#### Testing the Spell Checker (Using Rspec)
+To test: in the command line run 'bundle exec rspec'
+
+##### Link on Github
+https://github.com/ericak11/spell_checker
