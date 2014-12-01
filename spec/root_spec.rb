@@ -8,5 +8,11 @@ describe("the root") do
     fill_in('textarea', :with => 'Hello this is sample text')
     click_on('submit')
   end
-
+  it "can check spelling for accuracy" do
+    visit("/")
+    fill_in('textarea', :with => 'Hello this is sample text')
+    click_on('submit')
+    save_and_open_page
+    expect(page).to have_content("Accuracy")
+  end
 end
