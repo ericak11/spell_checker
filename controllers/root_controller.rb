@@ -7,15 +7,20 @@ class RootController < ApplicationController
   post('/') do
     results = check_dictionary(params[:text])
     total_words = results[1] + results[2]
-    accuracy  = ((results[1]/total_words.to_f) * 100).round(2)
+    accuracy  = ((results[1] / total_words.to_f) * 100).round(2)
     phrase = results[0]
-    {phrase: phrase, accuracy: accuracy, incorrect: results[2], correct: results[1], total: total_words}.to_json
+    { phrase: phrase,
+      accuracy: accuracy,
+      incorrect: results[2],
+      correct: results[1],
+      total: total_words
+    }.to_json
   end
 
-  def get_dictionary
-    dictionary = Hash.new{|hash, key| hash[key] = []}
+  def load_dictionary
+    dictionary = Hash.new { |hash, key| hash[key] = [] }
     File.open('public/images/dictionary.txt').each do |row|
-      word = row.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '').strip.gsub(/\/[^\s]+/,"").downcase
+      word = row.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '').strip.gsub(/\/[^\s]+/, "").downcase
       first_letter =  word[0,1]
       dictionary[first_letter] << word
     end
@@ -23,7 +28,7 @@ class RootController < ApplicationController
   end
 
   def check_dictionary(text)
-    dictionary = get_dictionary
+    dictionary = load_dictionary
     phrase = ""
     correct = 0
     incorrect = 0
